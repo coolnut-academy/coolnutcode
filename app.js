@@ -533,7 +533,7 @@ const App = () => {
   }, React.createElement("div", {
     className: "flex min-w-0 items-center gap-3"
   }, React.createElement("img", {
-    src: "./logo%20coolnutcode.png",
+    src: "./coolnutcode-logo-web.png",
     alt: "COOLNUTCODE logo",
     className: "h-12 w-12 shrink-0 rounded-lg object-contain"
   }), React.createElement("div", null, React.createElement("h1", {
@@ -591,7 +591,7 @@ const App = () => {
     name: "menu",
     className: "w-5 h-5"
   })), React.createElement("img", {
-    src: "./logo%20coolnutcode.png",
+    src: "./coolnutcode-logo-web.png",
     alt: "COOLNUTCODE logo",
     className: "h-11 w-11 shrink-0 rounded-lg object-contain"
   }), React.createElement("div", {

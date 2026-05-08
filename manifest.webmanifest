@@ -1,0 +1,24 @@
+{
+  "name": "COOLNUTCODE",
+  "short_name": "COOLNUTCODE",
+  "description": "AI Project Workflow Builder for Thai coding projects.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#090d14",
+  "theme_color": "#090d14",
+  "icons": [
+    {
+      "src": "./coolnutcode-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./coolnutcode-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
