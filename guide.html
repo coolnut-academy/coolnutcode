@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คู่มือ COOLNUTCODE - AI Project Workflow Builder</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="icon" type="image/png" href="./logo%20coolnutcode.png">
+    <style>
+        :root { color-scheme: dark; }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            background: #090d14;
+            color: #f8fafc;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+        }
+        a { color: inherit; }
+        code {
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 6px;
+            background: rgba(15, 23, 42, 0.85);
+            padding: 0.1rem 0.35rem;
+            color: #67e8f9;
+            font-size: 0.92em;
+            overflow-wrap: anywhere;
+        }
+        .page {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, rgba(34, 211, 238, 0.14), transparent 30rem),
+                radial-gradient(circle at top right, rgba(168, 85, 247, 0.12), transparent 34rem),
+                #090d14;
+        }
+        .wrap {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+            background: rgba(9, 13, 20, 0.86);
+            backdrop-filter: blur(14px);
+        }
+        .topbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            min-width: 0;
+        }
+        .logo {
+            display: block;
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(103, 232, 249, 0.28);
+            border-radius: 10px;
+            background: rgba(8, 145, 178, 0.16);
+            object-fit: contain;
+        }
+        .brand h1 {
+            margin: 0;
+            font-size: 1.05rem;
+            line-height: 1.2;
+        }
+        .brand p {
+            margin: 0.15rem 0 0;
+            color: #94a3b8;
+            font-size: 0.82rem;
+        }
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            border: 1px solid rgba(103, 232, 249, 0.32);
+            border-radius: 8px;
+            background: rgba(34, 211, 238, 0.12);
+            padding: 0.55rem 0.9rem;
+            color: #cffafe;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .hero {
+            padding: 4rem 0 2rem;
+        }
+        .eyebrow {
+            color: #67e8f9;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+        .hero h2 {
+            max-width: 880px;
+            margin: 0.7rem 0 1rem;
+            font-size: clamp(2rem, 5vw, 4.4rem);
+            line-height: 1.06;
+            letter-spacing: 0;
+        }
+        .hero p {
+            max-width: 760px;
+            margin: 0;
+            color: #cbd5e1;
+            font-size: 1.08rem;
+        }
+        .grid {
+            display: grid;
+            gap: 1rem;
+        }
+        .grid.two {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .grid.three {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        .card {
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-radius: 8px;
+            background: rgba(17, 24, 39, 0.78);
+            backdrop-filter: blur(14px);
+            padding: 1.15rem;
+        }
+        .card h3,
+        .card h4 {
+            margin: 0 0 0.7rem;
+            line-height: 1.3;
+        }
+        .card p,
+        .card li {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+        .card ul,
+        .card ol {
+            margin: 0.5rem 0 0;
+            padding-left: 1.25rem;
+        }
+        .section {
+            padding: 2rem 0;
+        }
+        .section-title {
+            margin: 0 0 1rem;
+            font-size: 1.55rem;
+        }
+        .step {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            gap: 0.9rem;
+        }
+        .num {
+            display: grid;
+            width: 32px;
+            height: 32px;
+            place-items: center;
+            border-radius: 999px;
+            background: #22d3ee;
+            color: #031019;
+            font-weight: 900;
+        }
+        .tag {
+            display: inline-block;
+            margin: 0 0.35rem 0.35rem 0;
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.88);
+            padding: 0.2rem 0.55rem;
+            color: #cbd5e1;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .callout {
+            border-color: rgba(251, 191, 36, 0.28);
+            background: rgba(251, 191, 36, 0.08);
+        }
+        .footer {
+            padding: 2rem 0 3rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 860px) {
+            .grid.two,
+            .grid.three {
+                grid-template-columns: 1fr;
+            }
+            .topbar-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+            .button {
+                width: 100%;
+            }
+            .hero {
+                padding-top: 2.6rem;
+            }
+        }
+        @media (max-width: 420px) {
+            .wrap {
+                width: min(100% - 24px, 1120px);
+            }
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            .card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="topbar">
+            <div class="wrap topbar-inner">
+                <div class="brand">
+                    <img class="logo" src="./logo%20coolnutcode.png" alt="COOLNUTCODE logo">
+                    <div>
+                        <h1>COOLNUTCODE Guide</h1>
+                        <p>คู่มือใช้งาน AI Project Workflow Builder สำหรับผู้ใช้ทั่วไป</p>
+                    </div>
+                </div>
+                <a class="button" href="./index.html">กลับไปหน้าเครื่องมือ</a>
+            </div>
+        </header>
+
+        <main class="wrap">
+            <section class="hero">
+                <div class="eyebrow">AI Coding Workflow For Thai Builders</div>
+                <h2>ใช้ Claude, Codex, Gemini และ IDE ให้เป็นขั้นตอนเดียวกัน</h2>
+                <p>
+                    หน้านี้อธิบายว่าแต่ละโหมดใน COOLNUTCODE ใช้เมื่อไร, output ส่วนไหนต้อง copy ไปวางที่ไหน,
+                    และควรทำอะไรต่อใน Claude Pro, VS Code + Codex, terminal, GitHub Pages หรือ Vercel
+                    เพื่อให้คนที่ไม่คุ้นกับ AI coding ก็เดินงานได้อย่างมั่นใจ
+                </p>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">ภาพรวมแบบสั้น</h2>
+                <div class="grid three">
+                    <article class="card">
+                        <h3>1. คิดไอเดียในเว็บนี้</h3>
+                        <p>พิมพ์ไอเดียเป็นภาษาไทยใน <code>Build From Scratch</code> หรือเลือกโหมดเฉพาะงาน เช่น debug, patch, QA.</p>
+                    </article>
+                    <article class="card">
+                        <h3>2. เอา output ไปวางในเครื่องมือที่ถูกต้อง</h3>
+                        <p>Claude เหมาะกับวางแผนและ review. Codex ใน VS Code เหมาะกับแก้โค้ดจริง. Terminal ใช้ตรวจ build/lint/test.</p>
+                    </article>
+                    <article class="card">
+                        <h3>3. ทำทีละ phase</h3>
+                        <p>อย่าสั่งให้ agent ทำทั้งระบบในครั้งเดียว โดยเฉพาะงาน login, database, upload, payment หรือ production.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">เริ่มโปรเจกต์ใหม่ด้วย Build From Scratch</h2>
+                <div class="grid two">
+                    <article class="card step">
+                        <div class="num">1</div>
+                        <div>
+                            <h3>ใส่ไอเดียหลัก</h3>
+                            <p>ตัวอย่าง: <code>เว็บคำนวณค่า BMI หน้าเดียว</code> หรือ <code>ระบบ portfolio นักเรียน มี login dashboard admin นักเรียนอัปโหลดงานได้</code>.</p>
+                        </div>
+                    </article>
+                    <article class="card step">
+                        <div class="num">2</div>
+                        <div>
+                            <h3>อ่าน Analysis และ Recommended Stack</h3>
+                            <p>ถ้าเป็น Level 1 มักทำ static ได้. ถ้าเป็น Level 3-4 ควรใช้ Claude วางแผนก่อน แล้วค่อยให้ Codex ทำทีละ phase.</p>
+                        </div>
+                    </article>
+                    <article class="card step">
+                        <div class="num">3</div>
+                        <div>
+                            <h3>Copy Claude Planning Prompt</h3>
+                            <p>นำส่วน <code>Claude Planning Prompt</code> ไปวางใน Claude Pro เพื่อให้ Claude สร้างไฟล์ planning เช่น <code>00_PROJECT_BRIEF.md</code> ถึง <code>09_HANDOFF_SUMMARY.md</code>.</p>
+                        </div>
+                    </article>
+                    <article class="card step">
+                        <div class="num">4</div>
+                        <div>
+                            <h3>สร้าง project-docs ใน VS Code</h3>
+                            <p>เปิดโปรเจกต์ใน VS Code แล้วสร้างโฟลเดอร์ <code>project-docs</code>. นำเนื้อหาที่ Claude สร้างมาใส่เป็นไฟล์ Markdown ตามชื่อที่กำหนด.</p>
+                        </div>
+                    </article>
+                    <article class="card step">
+                        <div class="num">5</div>
+                        <div>
+                            <h3>Copy Codex Implementation Prompt</h3>
+                            <p>นำส่วน <code>Codex Implementation Prompt</code> ไปวางใน Codex ใน VS Code. ให้ Codex อ่าน <code>/project-docs/*.md</code> และทำเฉพาะ Phase 1.</p>
+                        </div>
+                    </article>
+                    <article class="card step">
+                        <div class="num">6</div>
+                        <div>
+                            <h3>ตรวจด้วย terminal</h3>
+                            <p>หลัง Codex ทำเสร็จ ให้รันคำสั่งที่ phase ระบุ เช่น <code>npm run build</code>, <code>npm run lint</code>, หรือเปิดไฟล์ HTML ตรวจเองถ้าเป็น static.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Output ส่วนไหนเอาไปทำอะไร</h2>
+                <div class="grid two">
+                    <article class="card">
+                        <h3>Idea Analysis</h3>
+                        <p>ใช้อ่านเองเพื่อเข้าใจว่าโปรเจกต์ง่ายหรือเสี่ยงแค่ไหน ถ้าผลออกมา Level 3-4 อย่าข้ามขั้น planning.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Recommended AI / IDE</h3>
+                        <p>บอกว่าควรใช้ Codex อย่างเดียว หรือควรใช้ Claude วางแผนก่อน. ใช้ตัดสินว่าจะเปิด Claude Pro หรือเข้า VS Code ทันที.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Claude Planning Prompt</h3>
+                        <p>copy ไปวางใน Claude Pro. ใช้สร้างเอกสารแผน, phase, QA checklist, debug playbook และ prompt สำหรับ Codex.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Markdown File Structure</h3>
+                        <p>ใช้เป็นรายชื่อไฟล์ในโฟลเดอร์ <code>project-docs</code>. ไฟล์เหล่านี้ทำให้ Codex เข้าใจแผนโดยไม่ต้องเดา.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Codex Implementation Prompt</h3>
+                        <p>copy ไปวางใน Codex ใน VS Code. ใช้สั่งให้ Codex ทำ Phase 1 เท่านั้น และหยุดหลังตรวจ build/lint/test.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Debug and Review Workflow</h3>
+                        <p>ใช้เมื่อ build fail หรือ behavior ไม่ตรง. ถ้า Codex แก้พลาดสองรอบ ให้เอา error log และไฟล์สำคัญไปถาม Claude หา root cause.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">ควรใช้โหมดไหน</h2>
+                <div class="grid two">
+                    <article class="card">
+                        <h3>Build From Scratch</h3>
+                        <p>ใช้เมื่อเริ่มโปรเจกต์ใหม่จากศูนย์ และอยากให้เว็บช่วยเลือก stack + workflow ให้ครบ.</p>
+                        <span class="tag">new project</span><span class="tag">Claude plan</span><span class="tag">Codex phase</span>
+                    </article>
+                    <article class="card">
+                        <h3>Legacy Step 0 Prompt</h3>
+                        <p>ใช้เมื่ออยากได้ planning prompt แบบสั้น ไม่ต้องการ package เต็ม. เหมาะกับการถาม Claude/Gemini แบบเร็ว.</p>
+                        <span class="tag">quick planning</span><span class="tag">short output</span>
+                    </article>
+                    <article class="card">
+                        <h3>Mid-Dev Build</h3>
+                        <p>ใช้เมื่อโปรเจกต์มีอยู่แล้วและต้องการเพิ่มฟีเจอร์หนึ่งชิ้นใน VS Code ด้วย Codex.</p>
+                        <span class="tag">feature patch</span><span class="tag">VS Code</span><span class="tag">Codex</span>
+                    </article>
+                    <article class="card">
+                        <h3>Debug & Fix</h3>
+                        <p>ใช้เมื่อมี error, build fail, UI ไม่ทำงาน หรือ behavior ไม่ตรง. ใส่ reproduction steps และ error log ให้ครบ.</p>
+                        <span class="tag">debug</span><span class="tag">error log</span><span class="tag">root cause</span>
+                    </article>
+                    <article class="card">
+                        <h3>Final QA</h3>
+                        <p>ใช้ก่อน deploy หรือหลังทำ phase สำคัญเสร็จ เพื่อให้ Claude review findings ก่อนส่ง Codex แก้ทีละเรื่อง.</p>
+                        <span class="tag">review</span><span class="tag">responsive</span><span class="tag">deploy</span>
+                    </article>
+                    <article class="card">
+                        <h3>Existing Project Modes</h3>
+                        <p>ใช้กับโปรเจกต์ที่เปิดใน VS Code แล้ว ไม่ต้องแปะ GitHub link. ให้ Codex อ่านไฟล์จริงในเครื่อง.</p>
+                        <span class="tag">existing codebase</span><span class="tag">local files</span>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">เลือก IDE และเครื่องมืออย่างไร</h2>
+                <div class="grid three">
+                    <article class="card">
+                        <h3>Claude Pro</h3>
+                        <ul>
+                            <li>เหมาะกับวางแผน architecture</li>
+                            <li>เหมาะกับ review diff และหา root cause</li>
+                            <li>ไม่ควรให้ Claude เขียนไฟล์แทน Codex ถ้าไฟล์อยู่ใน VS Code</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <h3>VS Code + Codex</h3>
+                        <ul>
+                            <li>เหมาะกับอ่านไฟล์จริงและแก้โค้ดจริง</li>
+                            <li>ควรสั่งทีละ phase หรือทีละ bug</li>
+                            <li>ควรให้ Codex รายงาน changed files และ commands ที่รัน</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <h3>Terminal</h3>
+                        <ul>
+                            <li>ใช้รัน build/lint/test</li>
+                            <li>copy error log กลับไปให้ Codex หรือ Claude</li>
+                            <li>อย่าแก้ต่อถ้า command fail โดยไม่เข้าใจสาเหตุ</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Stack ที่ระบบแนะนำหมายถึงอะไร</h2>
+                <div class="grid three">
+                    <article class="card">
+                        <h3>A. Static</h3>
+                        <p><code>index.html + Tailwind CDN + GitHub Pages</code> เหมาะกับเว็บหน้าเดียว เครื่องคิดเลข prompt helper หรือ landing page. ไม่ควรมี login/database/secret.</p>
+                    </article>
+                    <article class="card">
+                        <h3>B. Vite React</h3>
+                        <p>เหมาะกับหลาย component, state เยอะ, search/filter/export แต่ยังไม่มี auth หรือ database. ใช้เมื่อ static เริ่มดูแลยาก.</p>
+                    </article>
+                    <article class="card">
+                        <h3>C. Next.js + Firebase</h3>
+                        <p>เหมาะกับ login, dashboard, role, upload, user data, permissions และ production deployment. ต้องระวัง security rules มากเป็นพิเศษ.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section">
+                <article class="card callout">
+                    <h2 class="section-title">กฎสำคัญสำหรับผู้ใช้ทั่วไป</h2>
+                    <ol>
+                        <li>ถ้า output บอกว่า Level 3 หรือ Level 4 ให้ใช้ Claude วางแผนก่อนเสมอ</li>
+                        <li>อย่าให้ Codex ทำทุก phase พร้อมกัน ให้ทำ Phase 1 เท่านั้นก่อน</li>
+                        <li>ถ้า Codex แก้ bug เดิมพลาดสองครั้ง ให้หยุด แล้วส่ง error log ให้ Claude วิเคราะห์ root cause</li>
+                        <li>ถ้าใช้ Firebase ต้องตรวจ security rules ก่อน deploy</li>
+                        <li>ถ้าเป็น GitHub Pages/static ห้ามฝัง API key หรือ secret ลงไฟล์เว็บ</li>
+                    </ol>
+                </article>
+            </section>
+        </main>
+
+        <footer class="wrap footer">
+            <p>COOLNUTCODE เป็นเว็บ static ที่เปิดบน GitHub Pages ได้ หน้า guide นี้ไม่ต้องใช้ backend และใช้งานคู่กับ <a href="./index.html">หน้าเครื่องมือหลัก</a>.</p>
+        </footer>
+    </div>
+</body>
+</html>
